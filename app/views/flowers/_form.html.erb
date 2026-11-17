@@ -1,0 +1,69 @@
+
+<%= form_with(model: flower) do |form| %>
+
+  <% if flower.errors.any? %>
+    <div class="alert alert-danger">
+      <h5>Помилки:</h5>
+      <ul>
+        <% flower.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :name, "Назва квітки",
+        class: "form-label" %>
+
+    <%= form.text_field :name,
+        class: "form-control",
+        placeholder: "Наприклад, Троянда" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :description, "Опис",
+        class: "form-label" %>
+
+    <%= form.text_area :description,
+        class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :price, "Ціна (грн)",
+        class: "form-label" %>
+
+    <%= form.number_field :price,
+        step: 0.01,
+        class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :category, "Категорія",
+        class: "form-label" %>
+
+    <%= form.select :category,
+        ["Весілля", "Дні народження", "Букети дня"],
+        { prompt: "Оберіть категорію" },
+        class: "form-select" %>
+  </div>
+
+
+  <div class="mb-3">
+    <%= form.label :image, "Фотографія квітки",
+        class: "form-label" %>
+
+    <%= form.file_field :image,
+        accept: "image/png,image/jpeg,image/webp",
+        class: "form-control" %>
+
+    <small class="form-text text-muted">
+      Дозволені формати: JPEG, PNG, WebP. Максимум 5 МБ.
+    </small>
+  </div>
+
+
+  <%= form.submit "Зберегти квітку",
+      class: "btn btn-success" %>
+
+<% end %>

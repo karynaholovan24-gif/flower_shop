@@ -1,0 +1,128 @@
+
+<div class="text-center mb-4">
+  <h1 class="text-success">Квітковий салон 🌸</h1>
+  <p class="lead">
+    Найкращі квіти для особливих моментів!
+  </p>
+</div>
+
+<!-- MAIN BANNER -->
+<div class="mb-4">
+  <%= image_tag "flower-banner.jpg",
+      class: "img-fluid rounded-4 shadow",
+      style: "width: 100%; height: 350px; object-fit: cover;" %>
+</div>
+
+<!-- NAV TABS -->
+<ul class="nav nav-tabs mb-4">
+
+  <li class="nav-item">
+    <%= link_to "Усі квіти",
+        flowers_path,
+        class: "nav-link #{'active' if params[:category].blank?}" %>
+  </li>
+
+  <li class="nav-item">
+    <%= link_to "Весілля",
+        flowers_path(category: "Весілля"),
+        class: "nav-link #{'active' if params[:category] == 'Весілля'}" %>
+  </li>
+
+  <li class="nav-item">
+    <%= link_to "Дні народження",
+        flowers_path(category: "Дні народження"),
+        class: "nav-link #{'active' if params[:category] == 'Дні народження'}" %>
+  </li>
+
+  <li class="nav-item">
+    <%= link_to "Букети дня",
+        flowers_path(category: "Букети дня"),
+        class: "nav-link #{'active' if params[:category] == 'Букети дня'}" %>
+  </li>
+
+</ul>
+
+<!-- FLOWERS CATALOG -->
+<div class="row">
+
+  <% @flowers.each do |flower| %>
+
+    <div class="col-md-4 mb-4">
+
+      <div class="card shadow h-100">
+
+        <!-- FLOWER IMAGE -->
+
+        <% if flower.image.attached? %>
+
+          <%= image_tag flower.image,
+              class: "card-img-top",
+              style: "height: 230px; object-fit: cover;" %>
+
+        <% else %>
+
+          <% image = case flower.name
+             when "Червоні троянди"
+               "roses.jpg"
+             when "Рожеві тюльпани"
+               "tulips.jpg"
+             when "Ромашковий букет"
+               "daisies.jpg"
+             else
+               "flower-banner.jpg"
+             end %>
+
+          <%= image_tag image,
+              class: "card-img-top",
+              style: "height: 230px; object-fit: cover;" %>
+
+        <% end %>
+
+        <!-- FLOWER INFORMATION -->
+
+        <div class="card-body">
+
+          <h4 class="card-title text-success">
+            <%= flower.name %>
+          </h4>
+
+          <p>
+            <%= flower.description %>
+          </p>
+
+          <p>
+            Категорія: <%= flower.category %>
+          </p>
+
+          <h5>
+            Ціна: <%= flower.price %> грн
+          </h5>
+
+          <!-- ACTION BUTTONS -->
+
+          <%= link_to "Переглянути",
+              flower_path(flower),
+              class: "btn btn-success" %>
+
+          <%= link_to "Редагувати",
+              edit_flower_path(flower),
+              class: "btn btn-warning" %>
+
+          <%= button_to "Видалити",
+              flower_path(flower),
+              method: :delete,
+              class: "btn btn-danger mt-2",
+              form: {
+                data: {
+                  turbo_confirm: "Видалити цю квітку?"
+                }
+              } %>
+
+        </div>
+      </div>
+
+    </div>
+
+  <% end %>
+
+</div>

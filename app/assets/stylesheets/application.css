@@ -1,0 +1,33 @@
+body {
+  background-color: #fff8fa !important;
+}
+
+.card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.card-img-top {
+  width: 100%;
+  object-fit: cover;
+}
+
+h1, h2, h3 {
+  color: #b04d70;
+}
+
+.nav-tabs .nav-link.active {
+  color: #b04d70;
+  font-weight: bold;
+}
+
+footer {
+  background-color: #49343d !important;
+}

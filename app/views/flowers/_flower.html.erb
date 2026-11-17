@@ -1,0 +1,29 @@
+<div id="<%= dom_id flower %>">
+  <div>
+    <strong>Name:</strong>
+    <%= flower.name %>
+  </div>
+
+  <div>
+    <strong>Description:</strong>
+    <%= flower.description %>
+  </div>
+
+  <div>
+    <strong>Price:</strong>
+    <%= flower.price %>
+  </div>
+
+  <div>
+    <strong>Category:</strong>
+    <%= flower.category %>
+  </div>
+
+  <% if flower.image.attached? %>
+    <div>
+      <strong>Photo:</strong>
+      <%= image_tag flower.image, width: 200 %>
+    </div>
+  <% end %>
+
+</div>
